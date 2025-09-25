@@ -1,0 +1,39 @@
+{
+  "companyInfo": {
+    "name": "WALLET CAMBIOS",
+    "website": "www.walletcambios.com",
+    "email": "soporte@walletcambios.com",
+    "phone": "+57 300 000 0000"
+  },
+  "invoiceInfo": {
+    "invoiceNumber": "FAC-070",
+    "date": "20/09/2025",
+    "transactionNumber": "70"
+  },
+  "clientInfo": {
+    "senderName": "Sthefany Guevara",
+    "document": "13014361"
+  },
+  "transactions": [
+    {
+      "originCountry": "Venezuela",
+      "destinationBank": "Banesco",
+      "recipient": "María Peres",
+      "reference": "00025826",
+      "amountSent": "12,200",
+      "usdEquivalent": "30"
+    },
+    {
+      "originCountry": "Colombia",
+      "destinationBank": "Bancolombia",
+      "recipient": "Angel Pérez",
+      "reference": "552255",
+      "amountSent": "60,000",
+      "usdEquivalent": "20"
+    }
+  ],
+  "totals": {
+    "totalPayments": 2,
+    "totalDeclaredAmount": "50 USD"
+  }
+}

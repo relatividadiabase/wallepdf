@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura {{invoiceInfo.invoiceNumber}} - Wallet Cambios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            background-color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .invoice-container {
+            max-width: 100%;
+            margin: 0;
+            background: white;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 50px;
+            background: linear-gradient(135deg, #20B2AA, #FF6347);
+            border-radius: 8px;
+            margin: 0 auto 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo::after {
+            content: "→";
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4A90E2;
+            margin-bottom: 10px;
+        }
+
+        .company-info {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        /* Invoice Info */
+        .invoice-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-info div {
+            flex: 1;
+        }
+
+        .invoice-info strong {
+            color: #333;
+        }
+
+        /* Client Info */
+        .client-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .client-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .client-info div {
+            margin-bottom: 5px;
+        }
+
+        /* Transactions Table */
+        .transactions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 11px;
+        }
+
+        .transactions-table th {
+            background: #4A90E2;
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #357ABD;
+        }
+
+        .transactions-table td {
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .transactions-table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        /* Totals */
+        .totals {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .totals div {
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            font-size: 10px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .invoice-info {
+                flex-direction: column;
+            }
+            
+            .transactions-table {
+                font-size: 10px;
+            }
+            
+            .transactions-table th,
+            .transactions-table td {
+                padding: 6px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo"></div>
+            <div class="company-name">{{companyInfo.name}}</div>
+            <div class="company-info">
+                Dirección web: {{companyInfo.website}}<br>
+                Email: {{companyInfo.email}} | Tel: {{companyInfo.phone}}
+            </div>
+        </div>
+
+        <!-- Invoice Info -->
+        <div class="invoice-info">
+            <div>
+                <strong>Factura N°:</strong> {{invoiceInfo.invoiceNumber}}
+            </div>
+            <div style="text-align: center;">
+                <strong>Fecha:</strong> {{invoiceInfo.date}}
+            </div>
+            <div style="text-align: right;">
+                <strong>Transacción N°:</strong> {{invoiceInfo.transactionNumber}}
+            </div>
+        </div>
+
+        <!-- Client Info -->
+        <div class="client-section">
+            <div class="section-title">Datos del Cliente</div>
+            <div class="client-info">
+                <div><strong>Nombre remitente:</strong> {{clientInfo.senderName}}</div>
+                <div><strong>Documento:</strong> {{clientInfo.document}}</div>
+            </div>
+        </div>
+
+        <!-- Transactions Table -->
+        <table class="transactions-table">
+            <thead>
+                <tr>
+                    <th>N° Pago</th>
+                    <th>País salida</th>
+                    <th>Banco destino</th>
+                    <th>Destinatario</th>
+                    <th>N° Referencia</th>
+                    <th>Monto enviado</th>
+                    <th>Equivalente (USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each transactions}}
+                <tr>
+                    <td>{{@index}}</td>
+                    <td>{{this.originCountry}}</td>
+                    <td>{{this.destinationBank}}</td>
+                    <td>{{this.recipient}}</td>
+                    <td>{{this.reference}}</td>
+                    <td>{{this.amountSent}}</td>
+                    <td>{{this.usdEquivalent}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <!-- Totals -->
+        <div class="totals">
+            <div>Total de pagos registrados: {{totals.totalPayments}}</div>
+            <div>Monto total declarado: {{totals.totalDeclaredAmount}}</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Factura generada automáticamente por Wallet Cambios.</p>
+            <p>Todos los pagos están sujetos a verificación bancaria.</p>
+        </div>
+    </div>
+</body>
+</html>
