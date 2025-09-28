@@ -56,11 +56,41 @@ async function generateInvoiceHTML(data) {
     const templatePath = path.join(__dirname, '../templates/invoice.hbs');
     const templateSource = await fs.readFile(templatePath, 'utf8');
     
+    // Cargar logo automáticamente desde assets/images/logo2.png
+    let logoBase64 = null;
+    try {
+      // Ruta fija del logo
+      const logoPath = path.join(__dirname, '../../assets/images/logo2.png');
+      console.log('Cargando logo automáticamente desde:', logoPath);
+      
+      // Leer imagen y convertir a base64
+      const logoBuffer = await fs.readFile(logoPath);
+      
+      // Determinar tipo MIME basado en el contenido del archivo
+      let mimeType = 'image/svg+xml'; // Asumimos SVG ya que nuestro "PNG" es realmente SVG
+      
+      // Si el archivo realmente fuera PNG, sería:
+      // mimeType = 'image/png';
+      
+      logoBase64 = `data:${mimeType};base64,${logoBuffer.toString('base64')}`;
+      console.log('Logo convertido a base64 exitosamente');
+      
+    } catch (logoError) {
+      console.warn('No se pudo cargar el logo automáticamente:', logoError.message);
+      logoBase64 = null;
+    }
+    
+    // Agregar logoBase64 a los datos del template
+    const templateData = {
+      ...data,
+      logoBase64: logoBase64
+    };
+    
     // Compilar template con Handlebars
     const template = handlebars.compile(templateSource);
     
     // Generar HTML con datos
-    const html = template(data);
+    const html = template(templateData);
     
     return html;
     

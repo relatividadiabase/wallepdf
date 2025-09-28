@@ -1,0 +1,22 @@
+<!-- Logo SVG de Wallet Cambios optimizado -->
+<svg width="80" height="50" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo transparente -->
+  <rect width="80" height="50" fill="transparent"/>
+  
+  <!-- Forma azul (turquesa) -->
+  <path d="M10 10 Q20 5 30 10 Q35 15 30 25 Q25 35 15 30 Q5 25 10 10" 
+        fill="#4ECDC4" 
+        stroke="none"/>
+  
+  <!-- Forma naranja -->
+  <path d="M45 15 Q55 10 65 15 Q70 20 65 30 Q60 40 50 35 Q40 30 45 15" 
+        fill="#FF6B35" 
+        stroke="none"/>
+  
+  <!-- Flecha blanca -->
+  <path d="M32 20 L42 25 L37 25 L37 30 L47 30 L47 20 L37 20 L37 15 L32 20" 
+        fill="#FFFFFF" 
+        stroke="#333" 
+        stroke-width="0.5"/>
+</svg>
+

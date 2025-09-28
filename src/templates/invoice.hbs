@@ -37,20 +37,16 @@
         .logo {
             width: 80px;
             height: 50px;
-            background: linear-gradient(135deg, #20B2AA, #FF6347);
-            border-radius: 8px;
             margin: 0 auto 15px;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .logo::after {
-            content: "→";
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .company-name {
@@ -177,7 +173,11 @@
     <div class="invoice-container">
         <!-- Header -->
         <div class="header">
-            <div class="logo"></div>
+            {{#if logoBase64}}
+            <div class="logo">
+                <img src="{{logoBase64}}" alt="Wallet Cambios Logo" />
+            </div>
+            {{/if}}
             <div class="company-name">{{companyInfo.name}}</div>
             <div class="company-info">
                 Dirección web: {{companyInfo.website}}<br>
