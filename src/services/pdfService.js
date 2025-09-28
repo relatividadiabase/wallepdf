@@ -65,12 +65,8 @@ async function generateInvoiceHTML(data) {
       
       // Leer imagen y convertir a base64
       const logoBuffer = await fs.readFile(logoPath);
-      
-      // Determinar tipo MIME basado en el contenido del archivo
-      let mimeType = 'image/svg+xml'; // Asumimos SVG ya que nuestro "PNG" es realmente SVG
-      
       // Si el archivo realmente fuera PNG, sería:
-      // mimeType = 'image/png';
+      let mimeType = 'image/png';
       
       logoBase64 = `data:${mimeType};base64,${logoBuffer.toString('base64')}`;
       console.log('Logo convertido a base64 exitosamente');
